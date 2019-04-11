@@ -11,6 +11,7 @@ boolean dead = true;
 int lvl_speed = 1;
 int size = 20;
 Snake snake = new Snake();
+boolean alive = true;
 
 void setup(){
   size(800,600);
@@ -26,8 +27,14 @@ void draw(){
   else{
       //start
       background(blue);
+      textAlign(LEFT);
+      textSize(15);
+      fill(255);
+      text("Score: " + snake.len, 10, 20);
+      
       snake.display();
       snake.update();
+      gameState();
   }
 }
 
@@ -50,5 +57,15 @@ void keyPressed() {
   } else if (keyCode == DOWN && snake.moveY != -1) {
     snake.vel.y = 1;
     snake.vel.x = 0;
+  }
+}
+
+void gameState(){
+  if(!alive){
+    background(blue); 
+    fill(yellow);
+    textSize(50);
+    text("Game Over!", 250, 300);
+    text("Score: " + snake.len, 250, 360);
   }
 }

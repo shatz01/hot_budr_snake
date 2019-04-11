@@ -14,6 +14,7 @@ class Snake {
   
   //update based on velocity/level 
   void update() {
+    detectCollision();
     pos.x += vel.x*lvl_speed;
     pos.y += vel.y*lvl_speed;
     
@@ -27,5 +28,11 @@ class Snake {
     noStroke();
     fill(yellow);
     rect(pos.x, pos.y, size, size);
+  }
+  
+  void detectCollision() {
+    if(pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height){
+      alive = false;
+    }
   }
 }
