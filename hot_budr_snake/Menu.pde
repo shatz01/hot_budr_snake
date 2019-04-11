@@ -15,6 +15,7 @@ class Menu {
     hardX = width - width/2.5, hardY = height/2 + 50,
     diffTextSize = 20;
   public Menu() {
+    menuSound.play();
     rectMode(CENTER);
     //start
     reset();
@@ -71,6 +72,7 @@ class Menu {
     println(x + ", " + y);
     if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       start = true;
+      menuSound.stop();
       println("start");
       //start
     } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
@@ -85,12 +87,12 @@ class Menu {
       diff = 1;
       fillDiff();
       println("1");
-      lvl_speed = 2; //increase speed
+      lvl_speed = 2;
     } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       diff = 2;
       fillDiff();
       println("2");
-      lvl_speed = 5; //increase speed 
+      lvl_speed = 5;
     }
   }
 

@@ -1,4 +1,6 @@
-PFont font;  
+import processing.sound.*;
+SoundFile menuSound;
+PFont font; 
 color blue = color(117, 207, 214);
 color yellow = color(252, 236, 151);
 color yellow_hover = color(252, 236, 151,100);
@@ -16,6 +18,7 @@ boolean alive = true;
 
 void setup(){
   font = createFont("Fonts/MODES.TTF", 32);
+  menuSound = new SoundFile(this, "Sounds/menuSound.mp3");
   textFont(font);
   size(800,600);
   background(blue);
