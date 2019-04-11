@@ -73,5 +73,8 @@ void gameState(){
     textSize(50);
     text("Game Over!", 250, 300);
     text("Score: " + snake.len, 250, 360);
+    if(mousePressed) {
+      exit();
+    }
   }
 }
