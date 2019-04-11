@@ -28,4 +28,5 @@ class Snake {
     fill(yellow);
     rect(pos.x, pos.y, size, size);
   }
+  
 }
