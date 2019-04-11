@@ -69,29 +69,29 @@ class Menu {
 
 
   void clicked(int x, int y) {
-    println(x + ", " + y);
+    //println(x + ", " + y);
     if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       start = true;
       menuSound.stop();
-      println("start");
+      //println("start");
       //start
     } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
-      println("quit");
+      //println("quit");
       exit();
       //start
     } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       diff = 0;
       fillDiff();
-      println("0");
+      //println("0");
     } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       diff = 1;
       fillDiff();
-      println("1");
+      //println("1");
       lvl_speed = 2;
     } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       diff = 2;
       fillDiff();
-      println("2");
+      //println("2");
       lvl_speed = 5;
     }
   }
@@ -108,7 +108,7 @@ class Menu {
       textAlign(CENTER);
       textSize(startTextSize);
       text("START", startTextX, startTextY);
-      println("start");
+      //println("start");
       //start
     } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       reset = false;
@@ -121,20 +121,20 @@ class Menu {
       textAlign(CENTER);
       textSize(quitTextSize);
       text("QUIT", quitTextX, quitTextY);
-      println("quit");
+      //println("quit");
       //start
     } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       hoverDiff(0);
-      println("0");
+      //println("0");
     } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       hoverDiff(1);
-      println("1");
+      //println("1");
     } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       hoverDiff(2);
-      println("2");
+      //println("2");
     } else {
       if (!reset) {
-        println("reseting");
+        //println("reseting");
         reset();
         reset = true;
       }
