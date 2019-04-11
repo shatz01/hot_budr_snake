@@ -1,3 +1,4 @@
+PFont font;  
 color blue = color(117, 207, 214);
 color yellow = color(252, 236, 151);
 color yellow_hover = color(252, 236, 151,100);
@@ -13,6 +14,8 @@ int size = 20;
 Snake snake = new Snake();
 
 void setup(){
+  font = createFont("Fonts/MODES.TTF", 32);
+  textFont(font);
   size(800,600);
   background(blue);
   m = new Menu();
