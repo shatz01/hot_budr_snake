@@ -18,7 +18,7 @@ boolean alive = true;
 
 void setup(){
   font = createFont("Fonts/MODES.TTF", 32);
-  menuSound = new SoundFile(this, "Sounds/menuSound.mp3");
+  menuSound = new SoundFile(this, "Sounds/menuSound.wav");
   textFont(font);
   size(800,600);
   background(blue);
