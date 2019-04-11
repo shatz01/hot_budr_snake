@@ -2,6 +2,18 @@ class Menu {
   public int diff = 0;
   public boolean start = false;
   private boolean reset = false;
+  private float diff0X = width/2.5, diff0Y = height/2, 
+    diff1X = width/2, diff1Y = height/2, 
+    diff2X = width - width/2.5, diff2Y = height/2, 
+    diffDiam = 40, hoverDiam = 30, 
+    startX = width/2, startY = height/3, startW = 240, startH = 100, 
+    startTextX = width/2, startTextY = height/3 + 20, startTextSize = 60,
+    quitX = width/2, quitY = height - height/5, quitW = 80, quitH = 40,
+    quitTextX = width/2, quitTextY = height - height/5 + 7, quitTextSize = 20,
+    easyX = width/2.5, easyY = height/2 + 50, 
+    mediumX = width/2, mediumY = height/2 + 50, 
+    hardX = width - width/2.5, hardY = height/2 + 50,
+    diffTextSize = 20;
   public Menu() {
     rectMode(CENTER);
     //start
@@ -13,17 +25,17 @@ class Menu {
     stroke(0);
     strokeWeight(3);
     fill(blue);
-    ellipse(width/2, height/2, 40, 40);
-    ellipse(width/2.5, height/2, 40, 40);
-    ellipse(width - width/2.5, height/2, 40, 40);
+    ellipse(diff1X, diff1Y, diffDiam, diffDiam);
+    ellipse(diff0X, diff0Y, diffDiam, diffDiam);
+    ellipse(diff2X, diff2Y, diffDiam, diffDiam);
 
-    fill(250, 238, 3);
+    fill(yellow);
     if (diff == 0) {
-      ellipse(width/2.5, height/2, 30, 30);
+      ellipse(diff0X, diff0Y, hoverDiam, hoverDiam);
     } else if (diff == 1) {
-      ellipse(width/2, height/2, 30, 30);
+      ellipse(diff1X, diff1Y, hoverDiam, hoverDiam);
     } else {
-      ellipse(width - width/2.5, height/2, 30, 30);
+      ellipse(diff2X, diff2Y, hoverDiam, hoverDiam);
     }
   }
 
@@ -32,90 +44,88 @@ class Menu {
     stroke(0);
     strokeWeight(3);
     fill(blue);
-    ellipse(width/2, height/2, 40, 40);
-    ellipse(width/2.5, height/2, 40, 40);
-    ellipse(width - width/2.5, height/2, 40, 40);
+    ellipse(diff1X, diff1Y, diffDiam, diffDiam);
+    ellipse(diff0X, diff0Y, diffDiam, diffDiam);
+    ellipse(diff2X, diff2Y, diffDiam, diffDiam);
 
-    fill(250, 238, 3, 100);
+    fill(yellow_hover);
     if (h == 0) {
-      ellipse(width/2.5, height/2, 30, 30);
+      ellipse(diff0X, diff0Y, hoverDiam, hoverDiam);
     } else if (h == 1) {
-      ellipse(width/2, height/2, 30, 30);
+      ellipse(diff1X, diff1Y, hoverDiam, hoverDiam);
     } else {
-      ellipse(width - width/2.5, height/2, 30, 30);
+      ellipse(diff2X, diff2Y, hoverDiam, hoverDiam);
     }
-    fill(250, 238, 3);
+    fill(yellow);
     if (diff == 0) {
-      ellipse(width/2.5, height/2, 30, 30);
+      ellipse(diff0X, diff0Y, hoverDiam, hoverDiam);
     } else if (diff == 1) {
-      ellipse(width/2, height/2, 30, 30);
+      ellipse(diff1X, diff1Y, hoverDiam, hoverDiam);
     } else {
-      ellipse(width - width/2.5, height/2, 30, 30);
+      ellipse(diff2X, diff2Y, hoverDiam, hoverDiam);
     }
   }
 
 
   void clicked(int x, int y) {
     println(x + ", " + y);
-    if (x >= width/2-120 && x <=width/2+120 && y >=height/3-50 && y <= height/3+50) {
+    if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       start = true;
       println("start");
       //start
-    } else if (x >= width/2-40 && x <=width/2+40 && y >=height - height/5-20 && y <= height - height/5+20) {
+    } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       println("quit");
       exit();
       //start
-    } else if (distance(x, y, (int)(width/2.5), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       diff = 0;
       fillDiff();
       println("0");
-    } else if (distance(x, y, (int)(width/2), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       diff = 1;
       fillDiff();
       println("1");
-      lvl_speed = 2;
-    } else if (distance(x, y, (int)(width - width/2.5), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       diff = 2;
       fillDiff();
       println("2");
-      lvl_speed = 5;
     }
   }
 
   void mouseHover(int x, int y) {
-    if (x >= width/2-120 && x <=width/2+120 && y >=height/3-50 && y <= height/3+50) {
+    if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);
-      rect(width/2, height/3, 240, 100);
-      fill(250, 238, 3, 100);
-      rect(width/2, height/3, 240, 100);
+      rect(startX, startY, startW, startH);
+      fill(yellow_hover);
+      rect(startX, startY, startW, startH);
       fill(0);
       textAlign(CENTER);
-      textSize(60);
-      text("START", width/2, height/3 + 20);
+      textSize(startTextSize);
+      text("START", startTextX, startTextY);
       println("start");
       //start
-    } else if (x >= width/2-40 && x <=width/2+40 && y >=height - height/5-20 && y <= height - height/5+20) {
+    } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);
-      rect(width/2, height - height/5, 80, 40);
-      fill(250, 238, 3,100);
-      rect(width/2, height - height/5, 80, 40);
+      rect(quitX, quitY, quitW, quitH);
+      fill(yellow_hover);
+      rect(quitX, quitY, quitW, quitH);
       fill(0);
       textAlign(CENTER);
-      textSize(20);
-      text("QUIT", width/2, height - height/5 + 7);
+      textSize(quitTextSize);
+      text("QUIT", quitTextX, quitTextY);
       println("quit");
       //start
-    } else if (distance(x, y, (int)(width/2.5), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       hoverDiff(0);
       println("0");
-    } else if (distance(x, y, (int)(width/2), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       hoverDiff(1);
       println("1");
-    } else if (distance(x, y, (int)(width - width/2.5), (int)(height/2)) <= 20) {
+    } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       hoverDiff(2);
       println("2");
     } else {
@@ -128,37 +138,37 @@ class Menu {
   }
 
   void reset() {
-    fill(250, 238, 3);
+    fill(yellow);
     strokeWeight(3);
-    rect(width/2, height/3, 240, 100);
+    rect(startX, startY, startW, startH);
     fill(0);
     textAlign(CENTER);
-    textSize(60);
-    text("START", width/2, height/3 + 20);
+    textSize(startTextSize);
+    text("START", startTextX, startTextY);
 
     //diff
     stroke(0);
     strokeWeight(3);
-    fill(255);
-    ellipse(width/2, height/2, 40, 40);
-    ellipse(width/2.5, height/2, 40, 40);
-    ellipse(width - width/2.5, height/2, 40, 40);
+    fill(blue);
+    ellipse(diff1X, diff1Y, diffDiam, diffDiam);
+    ellipse(diff0X, diff0Y, diffDiam, diffDiam);
+    ellipse(diff2X, diff2Y, diffDiam, diffDiam);
 
     //labels
-    textSize(20);
+    textSize(diffTextSize);
     fill(0);
-    text("Medium", width/2, height/2 + 50 );
-    text("Easy", width/2.5, height/2 + 50 );
-    text("Hard", width - width/2.5, height/2 + 50);
+    text("Medium", mediumX, mediumY );
+    text("Easy", easyX, easyY );
+    text("Hard", hardX, hardY);
 
     //quit
-    fill(250, 238, 3);
+    fill(yellow);
     strokeWeight(3);
-    rect(width/2, height - height/5, 80, 40);
+    rect(quitX, quitY, quitW, quitH);
     fill(0);
     textAlign(CENTER);
-    textSize(20);
-    text("QUIT", width/2, height - height/5 + 7);
+    textSize(quitTextSize);
+    text("QUIT", quitTextX, quitTextY);
 
     fillDiff();
   }
