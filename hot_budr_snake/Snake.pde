@@ -31,6 +31,7 @@ class Snake {
   }
   
   void detectCollision() {
+    //calculate whether snake hits a wall
     if(pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height){
       alive = false;
     }
