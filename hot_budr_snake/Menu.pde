@@ -73,10 +73,12 @@ class Menu {
       diff = 1;
       fillDiff();
       println("1");
+      lvl_speed = 2;
     } else if (distance(x, y, (int)(width - width/2.5), (int)(height/2)) <= 20) {
       diff = 2;
       fillDiff();
       println("2");
+      lvl_speed = 5;
     }
   }
 
