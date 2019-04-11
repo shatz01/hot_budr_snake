@@ -1,6 +1,10 @@
 color blue = color(117, 207, 214);
 color yellow = color(252, 236, 151);
 color yellow_hover = color(252, 236, 151,100);
+
+// obstacle border html is: e31837
+color obstacle_border = color(227, 24, 55);
+
 Menu m ;
 
 void setup(){
