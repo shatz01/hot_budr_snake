@@ -18,8 +18,8 @@ boolean alive = true;
 
 PImage obstacleImg = new PImage();
 
-Obstacle obstacle = new Obstacle(1);
-
+Obstacle obstacle = new Obstacle();
+int difficulty = 0;
 
 void setup(){
   font = createFont("Fonts/MODES.TTF", 32);
@@ -48,6 +48,7 @@ void draw(){
       text("Score: " + snake.len, 10, 20);
       
       snake.display();
+      obstacle.calcObstacle();
       obstacle.display();
       
       snake.update();

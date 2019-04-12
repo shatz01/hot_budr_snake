@@ -10,10 +10,11 @@ class Obstacle{
 
   PImage obstacleImage = new PImage();
   
-  Obstacle(int difficulty){
+  void calcObstacle(){
     if (difficulty == 1){
       this.numObstacles = 4;
-    } else if (difficulty == 2){
+    } 
+    else if (difficulty == 2){
       this.numObstacles = 9;
     }
     
@@ -23,13 +24,10 @@ class Obstacle{
   void makeObstacleLocations(){
     for(int i = 0; i < this.numObstacles; i++){
       obstaclesX.add(random(0, 800));
-      obstaclesY.add(random(0, 800));
+      obstaclesY.add(random(0, 600));
       //print(width);
     }
   }
-  
-  
-  
   
   void display(){
     for(int i = 0; i < this.numObstacles; i++){

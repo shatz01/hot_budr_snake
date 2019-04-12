@@ -88,11 +88,13 @@ class Menu {
       fillDiff();
       //println("1");
       lvl_speed = 2;
+      difficulty = 1;
     } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       diff = 2;
       fillDiff();
       //println("2");
       lvl_speed = 5;
+      difficulty = 2;
     }
   }
 
