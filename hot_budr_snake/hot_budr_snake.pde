@@ -16,6 +16,11 @@ int size = 20;
 Snake snake = new Snake();
 boolean alive = true;
 
+PImage obstacleImg = new PImage();
+
+Obstacle obstacle = new Obstacle(1);
+
+
 void setup(){
   font = createFont("Fonts/MODES.TTF", 32);
   menuSound = new SoundFile(this, "Sounds/menuSound.wav");
@@ -23,7 +28,11 @@ void setup(){
   size(800,600);
   background(blue);
   m = new Menu();
+  obstacleImg = loadImage("obstacle.png");
+  obstacle.obstacleImage = obstacleImg;
 }
+
+
 
 void draw(){
   if(!m.start){
@@ -39,6 +48,8 @@ void draw(){
       text("Score: " + snake.len, 10, 20);
       
       snake.display();
+      obstacle.display();
+      
       snake.update();
       gameState();
   }
