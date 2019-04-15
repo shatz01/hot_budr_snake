@@ -1,3 +1,5 @@
+boolean DEBUG = true;
+
 import processing.sound.*;
 SoundFile menuSound;
 PFont font; 
@@ -6,7 +8,8 @@ color yellow = color(252, 236, 151);
 color yellow_hover = color(252, 236, 151,100);
 
 // obstacle border html is: e31837
-color obstacle_border = color(227, 24, 55);
+color obstacle_border = color(227, 24, 55); // its red
+color target_border = color(255, 255, 255); // black
 
 Menu m ;
 boolean dead = true;

@@ -28,6 +28,7 @@ class Snake {
     noStroke();
     fill(yellow);
     rect(pos.x, pos.y, size, size);
+    fill(255);
   }
   
   void detectCollision() {
@@ -35,5 +36,27 @@ class Snake {
     if(pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height){
       alive = false;
     }
+    
+    // checks if snake hit an object in front of it
+    detectObstacle();
   }
+  
+  void detectObstacle(){   
+    
+    color check1 = get(int(pos.x + vel.x*15), int(pos.y + vel.y*15));
+    
+    // will show an ellipse around the area it checks for obstacles
+    if (DEBUG == true){
+      noFill();
+      stroke(255);
+      ellipse(pos.x + vel.x*15, pos.y + vel.y*15, 10, 10);
+    }
+    
+    if (check1 == obstacle_border){
+      alive = false;
+    } else if (check1 == target_border){ // got a target!
+      len++;
+    }    
+  }
+  
 }
