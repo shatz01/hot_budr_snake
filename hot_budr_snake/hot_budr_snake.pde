@@ -20,8 +20,7 @@ Snake snake = new Snake();
 boolean alive = true;
 
 PImage obstacleImg = new PImage();
-
-Obstacle obstacle = new Obstacle();
+Obstacle obstacle;
 int difficulty = 0;
 
 void setup(){
@@ -31,6 +30,7 @@ void setup(){
   size(800,600);
   background(blue);
   m = new Menu();
+  obstacle = new Obstacle();
   obstacleImg = loadImage("obstacle.png");
   obstacle.obstacleImage = obstacleImg;
 }

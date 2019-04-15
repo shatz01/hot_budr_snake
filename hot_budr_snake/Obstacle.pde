@@ -1,40 +1,61 @@
 import java.util.ArrayList;
 
-class Obstacle{
-  
+class Obstacle {
+
   int numObstacles = 0;
-  float obstacleW = 800/7;
-  float obstacleH = 600/7;
+  float obstacleW;
+  float obstacleH;
   ArrayList<Float> obstaclesX = new ArrayList<Float>();
   ArrayList<Float> obstaclesY = new ArrayList<Float>();
 
+  public Obstacle() {
+    obstacleH = height/10;
+    obstacleW = width/10;
+  }
+
   PImage obstacleImage = new PImage();
-  
-  void calcObstacle(){
-    if (difficulty == 1){
+
+  void calcObstacle() {
+    if (difficulty == 1) {
       this.numObstacles = 4;
-    } 
-    else if (difficulty == 2){
+    } else if (difficulty == 2) {
       this.numObstacles = 9;
     }
-    
+
     makeObstacleLocations();
   }
-  
-  void makeObstacleLocations(){
-    for(int i = 0; i < this.numObstacles; i++){
-      obstaclesX.add(random(0, 785));
-      obstaclesY.add(random(0, 685));
+
+  void makeObstacleLocations() {
+    int obs = 0;
+    for (int i = 0; i < this.numObstacles; i++) {
+      float ranx = 0;
+      float rany = 0;
+      boolean col = true;
+      while (col) {
+        ranx = random(0, width - obstacleW);
+        rany = random(0, height - obstacleH);
+        //println("Trying: " + ranx + ", " + rany);
+        col = false;
+        for (int j = 0; j < obs; j++) {
+          if (((obstaclesX.get(j) + obstacleW >= ranx && obstaclesX.get(j)  <= ranx) || (ranx + obstacleW  >= obstaclesX.get(j) && ranx <= obstaclesX.get(j))) 
+          && ((obstaclesY.get(j) + obstacleH >= rany && obstaclesY.get(j)  <= rany) || (rany + obstacleH  >= obstaclesY.get(j) && rany <= obstaclesY.get(j)))) {
+            //println("err: col");
+            col = true;
+          }
+        }
+      }
+      println("Adding: " + ranx + ", " + rany);
+      obstaclesX.add(ranx);
+      obstaclesY.add(rany);
+      obs++;
       //print(width);
     }
   }
-  
-  void display(){
-    for(int i = 0; i < this.numObstacles; i++){
+
+  void display() {
+    for (int i = 0; i < this.numObstacles; i++) {
       image(obstacleImage, obstaclesX.get(i), obstaclesY.get(i), obstacleW, obstacleH);
-      //print(width);
+      //println(obstaclesX.get(i) + ", " + obstaclesY.get(i));
     }
   }
-  
-  
 }
