@@ -55,7 +55,8 @@ class Snake {
     if (check1 == obstacle_border){
       alive = false;
     } else if (check1 == target_border){ // got a target!
-      len++;
+      //print("aye");
+      //len++;
     }    
   }
   
