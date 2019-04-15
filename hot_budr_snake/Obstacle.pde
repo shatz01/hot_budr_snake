@@ -23,8 +23,8 @@ class Obstacle{
   
   void makeObstacleLocations(){
     for(int i = 0; i < this.numObstacles; i++){
-      obstaclesX.add(random(0, 800));
-      obstaclesY.add(random(0, 600));
+      obstaclesX.add(random(0, 785));
+      obstaclesY.add(random(0, 685));
       //print(width);
     }
   }
