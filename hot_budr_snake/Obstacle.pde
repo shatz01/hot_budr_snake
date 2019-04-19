@@ -43,6 +43,9 @@ class Obstacle {
             col = true;
           }
         }
+        if(ranx > (width/2) - (obstacleW * 2) + obstacleW/2 && ranx < (width/2) + (obstacleW) - obstacleW/2  && rany > (height/2) - (obstacleH * 2) + obstacleH/2  && rany < (height/2) + (obstacleH) - obstacleH/2  ){
+           col = true; 
+        }
       }
       println("Adding: " + ranx + ", " + rany);
       obstaclesX.add(ranx);
