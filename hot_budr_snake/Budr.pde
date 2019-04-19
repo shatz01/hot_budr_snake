@@ -17,7 +17,7 @@ class Budr{
     float rany = random(0, height - budrH);
     // TODO: check that these locations dont have any images in them
     // if they do, recalculate
-    
+      
     this.budrX = ranx;
     this.budrY = rany;
   }

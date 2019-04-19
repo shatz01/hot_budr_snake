@@ -19,6 +19,7 @@ int lvl_speed = 1;
 int size = 20;
 Snake snake = new Snake();
 boolean alive = true;
+int diff_speed = 2;
 
 PImage obstacleImg = new PImage();
 Obstacle obstacle;

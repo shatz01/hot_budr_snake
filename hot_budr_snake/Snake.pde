@@ -20,8 +20,12 @@ class Snake {
 
     moveX = int(vel.x);
     moveY = int(vel.y);
+    
+   if(len%lvl_speed*3 == 0 && len >= 3*lvl_speed*diff_speed){
+     lvl_speed++;
+     diff_speed++;
+   }
   }
-
 
   //draw the snake
   void display() {

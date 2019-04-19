@@ -93,7 +93,7 @@ class Menu {
       diff = 2;
       fillDiff();
       //println("2");
-      lvl_speed = 5;
+      lvl_speed = 4;
       difficulty = 2;
     }
   }
