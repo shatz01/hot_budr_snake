@@ -9,7 +9,8 @@ color yellow_hover = color(252, 236, 151,100);
 
 // obstacle border html is: e31837
 color obstacle_border = color(227, 24, 55); // its red
-color target_border = color(255, 255, 255); // black
+color target_border = color(0, 0, 0); // black
+color target_inside = color(252, 236, 151); // budr yellow
 
 Menu m ;
 boolean dead = true;
@@ -21,6 +22,10 @@ boolean alive = true;
 
 PImage obstacleImg = new PImage();
 Obstacle obstacle;
+
+PImage budrImg = new PImage();
+Budr budr;
+
 int difficulty = 0;
 
 void setup(){
@@ -30,9 +35,16 @@ void setup(){
   size(800,600);
   background(blue);
   m = new Menu();
+  
+  // Obstacles
   obstacle = new Obstacle();
   obstacleImg = loadImage("obstacle.png");
   obstacle.obstacleImage = obstacleImg;
+  
+  // Budr
+  budr = new Budr();
+  budrImg = loadImage("target.png");
+  budr.budrImage = budrImg;
 }
 
 
@@ -53,6 +65,7 @@ void draw(){
       snake.display();
       obstacle.calcObstacle();
       obstacle.display();
+      budr.display();
       
       snake.update();
       gameState();

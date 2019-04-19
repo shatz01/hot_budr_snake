@@ -20,6 +20,7 @@ class Snake {
     
     moveX = int(vel.x);
     moveY = int(vel.y);
+    
   }
 
 
@@ -29,6 +30,14 @@ class Snake {
     fill(yellow);
     rect(pos.x, pos.y, size, size);
     fill(255);
+  }
+  
+  // see if the thing is moving or not
+  boolean isMoving(){
+    if(vel.x != 0 || vel.y != 0){
+      return true;
+    }
+    return false;
   }
   
   void detectCollision() {
@@ -52,12 +61,18 @@ class Snake {
       ellipse(pos.x + vel.x*15, pos.y + vel.y*15, 10, 10);
     }
     
-    if (check1 == obstacle_border){
-      alive = false;
-    } else if (check1 == target_border){ // got a target!
-      //print("aye");
-      //len++;
-    }    
+    
+    if (isMoving()){
+      if (check1 == obstacle_border){
+        alive = false;
+      } else if (check1 == target_border || check1 == target_inside){ // got a target!
+        //print("aye");
+        len++;
+        budr.randomizeLocation();
+        //alive = false;
+      }
+    }
+        
   }
   
 }
