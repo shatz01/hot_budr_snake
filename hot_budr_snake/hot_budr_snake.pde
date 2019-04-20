@@ -14,6 +14,7 @@ color target_inside = color(252, 236, 151); // budr yellow
 
 Menu m ;
 boolean dead = true;
+PImage arrowKeys;
 
 int lvl_speed = 1;
 int size = 20;
@@ -55,7 +56,29 @@ void draw(){
       //mouse hover
       m.mouseHover(mouseX,mouseY);
   }
-  else{
+  if(m.how) {
+    arrowKeys = loadImage("Images/arrowKeys.png");
+    background(blue);
+    textAlign(CENTER);
+    imageMode(CENTER);
+    textSize(25);
+    fill(255);
+    text("HOW TO PLAY", width/2, height/4);
+    image(arrowKeys, width/2, height/4+55, 120, 120);
+    text("Using the arrow keys navigate the playing", width/2, height/4+130);
+    text("field, collide with the hot_budr to grow ", width/2, height/4+160);
+    text("your snake, avoid not_budr obstacles and", width/2, height/4+190);
+    text("earn a highscore. Remember the more you ", width/2, height/4+220);
+    text("the more the snake grows the faster it gets!", width/2, height/4+250);
+    fill(yellow);
+    strokeWeight(3); 
+    rect(width/2,height - height/4, 80, 40);
+    fill(0);
+    textAlign(CENTER);
+    text("BACK", width/2, height - height/4 + 9);
+  }
+  
+  if(m.start){
       //start
       background(blue);
       textAlign(LEFT);

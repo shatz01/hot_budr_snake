@@ -2,12 +2,15 @@ class Menu {
   public int diff = 0;
   public boolean start = false;
   private boolean reset = false;
+  private boolean how = false;
   private float diff0X = width/2.5, diff0Y = height/2, 
     diff1X = width/2, diff1Y = height/2, 
     diff2X = width - width/2.5, diff2Y = height/2, 
     diffDiam = 40, hoverDiam = 30, 
     startX = width/2, startY = height/3, startW = 240, startH = 100, 
     startTextX = width/2, startTextY = height/3 + 20, startTextSize = 60,
+    howX = width/8, howY = height/12, howW = 150, howH = 40, 
+    howTextX = width/8, howTextY = height/12 + 7, howTextSize = 20,
     quitX = width/2, quitY = height - height/5, quitW = 80, quitH = 40,
     quitTextX = width/2, quitTextY = height - height/5 + 7, quitTextSize = 20,
     easyX = width/2.5, easyY = height/2 + 50, 
@@ -39,7 +42,7 @@ class Menu {
       ellipse(diff2X, diff2Y, hoverDiam, hoverDiam);
     }
   }
-
+  
   void hoverDiff(int h) {
     reset = false;
     stroke(0);
@@ -74,6 +77,10 @@ class Menu {
       start = true;
       menuSound.stop();
       //println("start");
+      //start
+    } else if (x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
+      //println("quit");
+      how = true;
       //start
     } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       //println("quit");
@@ -125,7 +132,20 @@ class Menu {
       text("QUIT", quitTextX, quitTextY);
       //println("quit");
       //start
-    } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
+    } else if (x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
+      reset = false;
+      fill(255);
+      strokeWeight(3);
+      rect(howX, howY, howW, howH);
+      fill(yellow_hover);
+      rect(howX, howY, howW, howH);
+      fill(0);
+      textAlign(CENTER);
+      textSize(howTextSize);
+      text("HOW TO PLAY", howTextX, howTextY);
+      //println("how to plau");
+      //start
+    }else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       hoverDiff(0);
       //println("0");
     } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
@@ -144,6 +164,16 @@ class Menu {
   }
 
   void reset() {
+    //how
+    fill(yellow);
+    strokeWeight(3);
+    rect(howX, howY, howW, howH);
+    fill(0);
+    textAlign(CENTER);
+    textSize(howTextSize);
+    text("HOW TO PLAY", howTextX, howTextY);
+    
+    //start
     fill(yellow);
     strokeWeight(3);
     rect(startX, startY, startW, startH);
