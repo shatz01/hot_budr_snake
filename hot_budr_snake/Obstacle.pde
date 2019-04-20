@@ -47,7 +47,7 @@ class Obstacle {
            col = true; 
         }
       }
-      println("Adding: " + ranx + ", " + rany);
+      //println("Adding: " + ranx + ", " + rany);
       obstaclesX.add(ranx);
       obstaclesY.add(rany);
       obs++;

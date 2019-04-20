@@ -5,6 +5,8 @@ SoundFile menuSound;
 PFont font; 
 color blue = color(117, 207, 214);
 color yellow = color(252, 236, 151);
+color fake_yellow = color(252, 236, 150);
+color fake_yellow2 = color(252, 236, 152);
 color yellow_hover = color(252, 236, 151,100);
 
 // obstacle border html is: e31837
