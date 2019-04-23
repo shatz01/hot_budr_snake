@@ -1,4 +1,4 @@
-boolean DEBUG = true;
+boolean DEBUG = false;
 
 import processing.sound.*;
 SoundFile menuSound;
