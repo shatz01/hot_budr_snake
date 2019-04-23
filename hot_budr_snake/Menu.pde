@@ -13,6 +13,8 @@ class Menu {
     howTextX = width/8, howTextY = height/12 + 7, howTextSize = 20,
     quitX = width/2, quitY = height - height/5, quitW = 80, quitH = 40,
     quitTextX = width/2, quitTextY = height - height/5 + 7, quitTextSize = 20,
+    backX = width/2, backY = height - height/4, backW = 80, backH = 40,
+    backTextX = width/2, backTextY = height - height/4 + 9, backTextSize = 25,
     easyX = width/2.5, easyY = height/2 + 50, 
     mediumX = width/2, mediumY = height/2 + 50, 
     hardX = width - width/2.5, hardY = height/2 + 50,
@@ -73,30 +75,35 @@ class Menu {
 
   void clicked(int x, int y) {
     //println(x + ", " + y);
-    if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
+    if (!how && x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       start = true;
       menuSound.stop();
       //println("start");
       //start
-    } else if (x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
+    } else if (!how && x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
       //println("quit");
       how = true;
       //start
-    } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
+    } else if (how && x >= backX-backW/2 && x <=backX+backW/2 && y >=backY-backH/2 && y <= backY+backH/2) {
+      background(blue);
+      how = false;
+      reset();
+      //start
+    }else if (!how && x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       //println("quit");
       exit();
       //start
-    } else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
+    } else if (!how && distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       diff = 0;
       fillDiff();
       //println("0");
-    } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
+    } else if (!how && distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       diff = 1;
       fillDiff();
       //println("1");
       lvl_speed = 2;
       difficulty = 1;
-    } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
+    } else if (!how && distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       diff = 2;
       fillDiff();
       //println("2");
@@ -106,7 +113,7 @@ class Menu {
   }
 
   void mouseHover(int x, int y) {
-    if (x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
+    if (!how && x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);
@@ -119,7 +126,7 @@ class Menu {
       text("START", startTextX, startTextY);
       //println("start");
       //start
-    } else if (x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
+    } else if (!how && x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);
@@ -132,26 +139,26 @@ class Menu {
       text("QUIT", quitTextX, quitTextY);
       //println("quit");
       //start
-    } else if (x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
+    } else if (how && x >= backX-backW/2 && x <=backX+backW/2 && y >=backY-backH/2 && y <= backY+backH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);
-      rect(howX, howY, howW, howH);
+      rect(backX, backY, backW, backH);
       fill(yellow_hover);
-      rect(howX, howY, howW, howH);
+      rect(backX, backY, backW, backH);
       fill(0);
       textAlign(CENTER);
-      textSize(howTextSize);
-      text("HOW TO PLAY", howTextX, howTextY);
+      textSize(backTextSize);
+      text("BACK", backTextX, backTextY);
       //println("how to plau");
       //start
-    }else if (distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
+    }else if (!how && distance(x, y, (int)diff0X, (int)diff0Y ) <= diffDiam/2) {
       hoverDiff(0);
       //println("0");
-    } else if (distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
+    } else if (!how && distance(x, y, (int)diff1X, (int)diff1Y ) <= diffDiam/2) {
       hoverDiff(1);
       //println("1");
-    } else if (distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
+    } else if (!how && distance(x, y, (int)diff2X, (int)diff2Y ) <= diffDiam/2) {
       hoverDiff(2);
       //println("2");
     } else {
