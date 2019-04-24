@@ -1,4 +1,9 @@
+// This is the Menu class.
+// It is the first thing a user sees
+
 class Menu {
+  
+  // member vars
   public int diff = 0;
   public boolean start = false;
   private boolean reset = false;
@@ -19,14 +24,23 @@ class Menu {
     mediumX = width/2, mediumY = height/2 + 50, 
     hardX = width - width/2.5, hardY = height/2 + 50,
     diffTextSize = 20;
+    
+   // constructor
   public Menu() {
+    
+    // first thing, play sound
     menuSound.play();
+    
+    // important for gui, we programmed the rest with this setting in mind
     rectMode(CENTER);
-    //start
+    
+    // start
     reset();
     reset = true;
   }
 
+  // fills the buttons with their correct color
+  // corresponds to the difficulty when selected
   void fillDiff() {
     stroke(0);
     strokeWeight(3);
@@ -35,6 +49,7 @@ class Menu {
     ellipse(diff0X, diff0Y, diffDiam, diffDiam);
     ellipse(diff2X, diff2Y, diffDiam, diffDiam);
 
+    // this yellow is more agressive than the hover yellow
     fill(yellow);
     if (diff == 0) {
       ellipse(diff0X, diff0Y, hoverDiam, hoverDiam);
@@ -45,6 +60,8 @@ class Menu {
     }
   }
   
+  // fills the buttons with their correct color
+  // corresponds to the difficulty when HOVERED
   void hoverDiff(int h) {
     reset = false;
     stroke(0);
@@ -54,6 +71,8 @@ class Menu {
     ellipse(diff0X, diff0Y, diffDiam, diffDiam);
     ellipse(diff2X, diff2Y, diffDiam, diffDiam);
 
+    // this yellow is less aggressive than the yellow
+    // when selected using a click
     fill(yellow_hover);
     if (h == 0) {
       ellipse(diff0X, diff0Y, hoverDiam, hoverDiam);
@@ -72,7 +91,8 @@ class Menu {
     }
   }
 
-
+  // checks to see if the user clicked on the buttons
+  // uncomment print statements to debug cause we had some trouble with that
   void clicked(int x, int y) {
     //println(x + ", " + y);
     if (!how && x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
@@ -112,6 +132,8 @@ class Menu {
     }
   }
 
+  // checks to see if mouse is hovering over the buttons
+  // used to change the color of buttons to a darker shade of yellow, for example
   void mouseHover(int x, int y) {
     if (!how && x >= startX-startW/2 && x <=startX+startW/2 && y >=startY-startH/2 && y <= startY+startH/2) {
       reset = false;
@@ -181,6 +203,8 @@ class Menu {
     }
   }
 
+  // on game reset, populate the window with the menu
+  // this is also called the first time menu is run
   void reset() {
     //how
     fill(yellow);

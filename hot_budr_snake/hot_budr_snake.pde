@@ -1,16 +1,29 @@
+//Kathryn Curley
+//Daniel Gilbert
+//Rebecca Loredo
+//Daniel Shatz
+// MAIN METHOD
+
+// This is the root of our game
+// setup is here as well as draw() function
+
+// turn this to true to see where snake is looking for obstacles
 boolean DEBUG = false;
 
+// imports
 import java.io.FileWriter;
 import java.io.*;
 import processing.sound.*;
 
+// cool sounds
 SoundFile menuSound;
 SoundFile eatSound;
 SoundFile hitSound;
 
+// colors for use as the theme as well as obstacle/budr detection
 PFont font; 
-color blue = color(117, 207, 214);
-color yellow = color(252, 236, 151);
+color blue = color(117, 207, 214); // theme blue
+color yellow = color(252, 236, 151); // theme yellow
 color fake_yellow = color(252, 236, 150);
 color fake_yellow2 = color(249, 237, 149);
 color yellow_hover = color(252, 236, 151, 100);
@@ -20,6 +33,7 @@ color obstacle_border = color(227, 24, 55); // its red
 color target_border = color(0, 0, 0); // black
 color target_inside = color(252, 236, 151); // budr yellow
 
+// instantiate things required for a lot of our classes, methods, and the like
 Menu m ;
 boolean dead = true;
 boolean check = false;
@@ -40,6 +54,7 @@ Budr budr;
 int difficulty = 0;
 int[] scores = new int[3];
 
+// run initial setup
 void setup() {
   font = createFont("Fonts/MODES.TTF", 32);
   menuSound = new SoundFile(this, "Sounds/menuSound.wav");
@@ -84,7 +99,7 @@ void setup() {
 }
 
 
-
+// run draw loop
 void draw() {
   if (!m.start) {
     //mouse hover
@@ -154,6 +169,7 @@ void keyPressed() {
   }
 }
 
+// required to see if still alive, tally score, etc
 void gameState() {
   if (!alive) {
     if (snake.len > scores[0] && !check) {

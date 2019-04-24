@@ -64,8 +64,8 @@ class Snake {
     //calculate whether snake hits a wall
     if (pos.x-size/2 < 0 || pos.x+size/2 > width || pos.y-size/2 < 0 || pos.y+size/2 > height) {
       hitSound.play();
-      println("wall");
-      println("x: " + pos.x + ", y: " + pos.y);
+      //println("wall");
+      //println("x: " + pos.x + ", y: " + pos.y);
       alive = false;
     }
 
@@ -73,9 +73,11 @@ class Snake {
     detectObstacle();
   }
 
+  // checks in front of the snake, just a few pixels in front of its head
+  // for anything thats not the background color
+  // if its not the background color, it will
+  // determine if its an obstacle or budr
   void detectObstacle() {   
-
-    //color check1 = get(int(pos.x + vel.x*15), int(pos.y + vel.y*15));
 
     // will show an ellipse around the area it checks for obstacles
     if (DEBUG == true) {
@@ -84,48 +86,48 @@ class Snake {
       ellipse(pos.x + vel.x*15, pos.y + vel.y*15, 10, 10);
     }
 
-
+    // We make sure that its not being checked before the snake starts moving as 
+    // if it would, it would immediately die as there is no velocity
     if (isMoving()) {
       for (int i = 0; i< size; i++) {
+        
+        // once it is moving, we check left right top and bottom of the snake
         color check1 = get(int(pos.x + size/2 + 1), int(pos.y - size/2 + i)); //right
         color check2 = get(int(pos.x - size/2 - 1), int(pos.y - size/2 + i)); //left
         color check3 = get(int(pos.x - size/2 + i), int(pos.y - size/2 - 1)); //top
         color check4 = get(int(pos.x - size/2 + i), int(pos.y + size/2 + 1)); //bottom
         if (check1 == obstacle_border || check2 == obstacle_border || check3 == obstacle_border || check4 == obstacle_border) {
+          
+          // play dope hit music
           hitSound.play();
-          println("obs");
           alive = false;
           break;
         } else if (check1 == target_border ||  check2 == target_border || check3 == target_border || check4 == target_border ) { // got a target!
-          //print("aye");
+        
+          // play dope eating music
           eatSound.play();
           len++;
-          println("len++");
           budr.randomizeLocation();
           break;
           //alive = false;
         } else {
           if ( moveX > 0 && check1 == fake_yellow2) {
             hitSound.play();
-            println("self right");
             set(int(pos.x + size/2 + 1), int(pos.y - size/2 + i), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveX < 0 && check2 == fake_yellow2) {
             hitSound.play();
-            println("self left");
             set(int(pos.x - size/2 - 1), int(pos.y - size/2 + i), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveY < 0 && check3 == fake_yellow2) {
             hitSound.play();
-            println("self up");
             set(int(pos.x - size/2 + i), int(pos.y - size/2 - 1), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveY > 0 && check4 == fake_yellow2) {
             hitSound.play();
-            println("self down");
             set(int(pos.x - size/2 + i), int(pos.y + size/2 + 1), color(255, 0, 0));
             alive = false;
             break;
@@ -137,6 +139,8 @@ class Snake {
     }
   }
 
+  // queue used to keep track of where each part of the snake is and later used to 
+  // draw the rest of the snake
   private class Queue {
     private List<PVector> list;
     public Queue() {
@@ -145,8 +149,6 @@ class Snake {
     public void enqueue(int x, int y) {
       PVector temp = new PVector(x, y);
       list.add(temp);
-      //println("size: " + size());
-      println(len);
       if (list.size() > (len-1) * size + 1) {
         list.remove(0);
       }
