@@ -63,6 +63,7 @@ class Snake {
   void detectCollision() {
     //calculate whether snake hits a wall
     if (pos.x-size/2 < 0 || pos.x+size/2 > width || pos.y-size/2 < 0 || pos.y+size/2 > height) {
+      hitSound.play();
       println("wall");
       println("x: " + pos.x + ", y: " + pos.y);
       alive = false;
@@ -91,6 +92,7 @@ class Snake {
         color check3 = get(int(pos.x - size/2 + i), int(pos.y - size/2 - 1)); //top
         color check4 = get(int(pos.x - size/2 + i), int(pos.y + size/2 + 1)); //bottom
         if (check1 == obstacle_border || check2 == obstacle_border || check3 == obstacle_border || check4 == obstacle_border) {
+          hitSound.play();
           println("obs");
           alive = false;
           break;
@@ -104,21 +106,25 @@ class Snake {
           //alive = false;
         } else {
           if ( moveX > 0 && check1 == fake_yellow2) {
+            hitSound.play();
             println("self right");
             set(int(pos.x + size/2 + 1), int(pos.y - size/2 + i), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveX < 0 && check2 == fake_yellow2) {
+            hitSound.play();
             println("self left");
             set(int(pos.x - size/2 - 1), int(pos.y - size/2 + i), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveY < 0 && check3 == fake_yellow2) {
+            hitSound.play();
             println("self up");
             set(int(pos.x - size/2 + i), int(pos.y - size/2 - 1), color(255, 0, 0));
             alive = false;
             break;
           } else if ( moveY > 0 && check4 == fake_yellow2) {
+            hitSound.play();
             println("self down");
             set(int(pos.x - size/2 + i), int(pos.y + size/2 + 1), color(255, 0, 0));
             alive = false;
