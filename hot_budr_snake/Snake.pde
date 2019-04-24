@@ -96,6 +96,7 @@ class Snake {
           break;
         } else if (check1 == target_border ||  check2 == target_border || check3 == target_border || check4 == target_border ) { // got a target!
           //print("aye");
+          eatSound.play();
           len++;
           println("len++");
           budr.randomizeLocation();

@@ -126,7 +126,18 @@ class Menu {
       text("START", startTextX, startTextY);
       //println("start");
       //start
-    } else if (!how && x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
+    } else if (!how && x >= howX-howW/2 && x <=howX+howW/2 && y >=howY-howH/2 && y <= howY+howH/2) {
+      reset = false;
+      fill(255);
+      strokeWeight(3);
+      rect(howX, howY, howW, howH);
+      fill(yellow_hover);
+      rect(howX, howY, howW, howH);
+      fill(0);
+      textAlign(CENTER);
+      textSize(howTextSize);
+      text("HOW TO PLAY", howTextX, howTextY);
+    }else if (!how && x >= quitX-quitW/2 && x <=quitX+quitW/2 && y >=quitY-quitH/2 && y <= quitY+quitH/2) {
       reset = false;
       fill(255);
       strokeWeight(3);

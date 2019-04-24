@@ -1,13 +1,19 @@
-boolean DEBUG = true;
+boolean DEBUG = false;
 
+import java.io.FileWriter;
+import java.io.*;
 import processing.sound.*;
+
 SoundFile menuSound;
+SoundFile eatSound;
+SoundFile hitSound;
+
 PFont font; 
 color blue = color(117, 207, 214);
 color yellow = color(252, 236, 151);
 color fake_yellow = color(252, 236, 150);
 color fake_yellow2 = color(249, 237, 149);
-color yellow_hover = color(252, 236, 151,100);
+color yellow_hover = color(252, 236, 151, 100);
 
 // obstacle border html is: e31837
 color obstacle_border = color(227, 24, 55); // its red
@@ -16,6 +22,7 @@ color target_inside = color(252, 236, 151); // budr yellow
 
 Menu m ;
 boolean dead = true;
+boolean check = false;
 PImage arrowKeys;
 
 int lvl_speed = 1;
@@ -31,34 +38,59 @@ PImage budrImg = new PImage();
 Budr budr;
 
 int difficulty = 0;
+int[] scores = new int[3];
 
-void setup(){
+void setup() {
   font = createFont("Fonts/MODES.TTF", 32);
   menuSound = new SoundFile(this, "Sounds/menuSound.wav");
+  eatSound = new SoundFile(this, "Sounds/eat.wav");
+  hitSound = new SoundFile(this, "Sounds/obstacleHit.wav");
   textFont(font);
-  size(800,600);
+  size(800, 600);
   background(blue);
   m = new Menu();
-  
+
   // Obstacles
   obstacle = new Obstacle();
   obstacleImg = loadImage("obstacle.png");
   obstacle.obstacleImage = obstacleImg;
-  
+
   // Budr
   budr = new Budr();
-  budrImg = loadImage("target.png");
+  budrImg = loadImage("target.png"); 
   budr.budrImage = budrImg;
+
+  String line;
+  try {
+    BufferedReader reader = createReader("data/highscore.txt");
+    line = reader.readLine();
+    int i = 0;
+    while (line != null) {
+      String[] pieces = split(line, "\n");
+      scores[i] = int(pieces[0]);
+      i++;
+      line = reader.readLine();
+    }
+
+    for (int j = 0; j < scores.length; j++) {
+      int score = scores[j];
+      println(score);
+    }
+  }
+  catch(IOException ioe) {
+    System.out.println("Exception ");
+    ioe.printStackTrace();
+  }
 }
 
 
 
-void draw(){
-  if(!m.start){
-      //mouse hover
-      m.mouseHover(mouseX,mouseY);
+void draw() {
+  if (!m.start) {
+    //mouse hover
+    m.mouseHover(mouseX, mouseY);
   }
-  if(m.how) {
+  if (m.how) {
     arrowKeys = loadImage("Images/arrowKeys.png");
     background(blue);
     textAlign(CENTER);
@@ -74,34 +106,34 @@ void draw(){
     text("the more the snake grows the faster it gets!", width/2, height/4+250);
     fill(yellow);
     strokeWeight(3); 
-    rect(width/2,height - height/4, 80, 40);
+    rect(width/2, height - height/4, 80, 40);
     fill(0);
     textAlign(CENTER);
     text("BACK", width/2, height - height/4 + 9);
-    
-    m.mouseHover(mouseX,mouseY);
+
+    m.mouseHover(mouseX, mouseY);
   }
-  
-  if(m.start){
-      //start
-      background(blue);
-      textAlign(LEFT);
-      textSize(15);
-      fill(255);
-      text("Score: " + snake.len, 10, 20);
-      
-      snake.display();
-      obstacle.calcObstacle();
-      obstacle.display();
-      budr.display();
-      
-      snake.update();
-      gameState();
+
+  if (m.start) {
+    //start
+    background(blue);
+    textAlign(LEFT);
+    textSize(15);
+    fill(255);
+    text("Score: " + snake.len, 10, 20);
+
+    snake.display();
+    obstacle.calcObstacle();
+    obstacle.display();
+    budr.display();
+
+    snake.update();
+    gameState();
   }
 }
 
-void mouseClicked(){
-    m.clicked(mouseX,mouseY);
+void mouseClicked() {
+  m.clicked(mouseX, mouseY);
 }
 
 //update velocity based on the key pressed
@@ -122,14 +154,65 @@ void keyPressed() {
   }
 }
 
-void gameState(){
-  if(!alive){
+void gameState() {
+  if (!alive) {
+    if (snake.len > scores[0] && !check) {
+      scores[0] = snake.len;
+      check = true;
+    }
+    if (snake.len > scores[1] && !check) {
+      scores[1] = snake.len;
+      check = true;
+    } 
+    if (snake.len > scores[2] && !check) {
+      scores[2] = snake.len;
+      check = true;
+    }
+
+
+    String newScores = scores[0] + "\n" + scores[1] + "\n" + scores[2];
+
+    PrintWriter output1 = createWriter("data/highscore.txt"); 
+    output1.println(newScores); // Writes the remaining data to the file
+    output1.flush();
+    output1.close(); 
+    //pw.close();
+
     background(blue); 
     fill(yellow);
     textSize(50);
-    text("Game Over!", 250, 300);
-    text("Score: " + snake.len, 250, 360);
-    if(mousePressed) {
+    text("Game Over!", 245, 160);
+    text("Score: " + snake.len, 275, 210);
+    textSize(30);
+    if(scores[0] == snake.len){
+      text("NEW HIGHSCORE!", 260, 280);
+      text("Leaderboard", 280, 340);
+      text("First: " + scores[0], 300, 370);
+      text("Second: " + scores[1], 300, 400);
+      text("Third: " + scores[2], 300, 430);
+    }
+    else if(scores[1] == snake.len){
+      text("NEW HIGHSCORE!", 260, 280);
+      text("Leaderboard", 280, 340);
+      text("First: " + scores[0], 300, 370);
+      text("Second: " + scores[1], 300, 400);
+      text("Third: " + scores[2], 300, 430);
+    }
+    else if(scores[2] == snake.len){
+      text("NEW HIGHSCORE!", 260, 280);
+      text("Leaderboard", 280, 340);
+      text("First: " + scores[0], 300, 370);
+      text("Second: " + scores[1], 300, 400);
+      text("Third: " + scores[2], 300, 430);
+    }
+    else {
+      text("No highscore this time!", 200, 280);
+      text("Leaderboard", 280, 340);
+      text("First: " + scores[0], 300, 370);
+      text("Second: " + scores[1], 300, 400);
+      text("Third: " + scores[2], 300, 430);
+    }
+    if (mousePressed) {
       exit();
     }
   }
