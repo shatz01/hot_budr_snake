@@ -2,8 +2,11 @@
 A snake on the lookout for some good ol' hot_budr
 
 This is a game made in processing by me and a few friends at the University of Florida!
+
+@rebeccaloredo
 @dangilbert98
 @katiec123
+
 
 Here are some screenshots:
 
